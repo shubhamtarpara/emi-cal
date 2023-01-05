@@ -10,7 +10,8 @@ const Cal = () => {
   const [time, setTime] = useState("");
   const [monthlyInterest, setMonthlyInterest] = useState();
   const [result, setResult] = useState();
-
+  let monthlyPayment;
+  let monthlyEmi;
   const submitHandler = (e) => {
     e.preventDefault();
   };
@@ -19,19 +20,22 @@ const Cal = () => {
     const month = year * 12;
     const emi =
       (amount * r * Math.pow(1 + r, month)) / (Math.pow(1 + r, month) - 1);
-    const result = emi.toFixed(0);
-    setResult(result);
-    console.log(result);
+    let monthlyEmi = emi.toFixed(0);
+    setResult(monthlyEmi);
+    console.log(monthlyEmi);
   }
 
   const calculateMonthlyInterest = () => {
     const rate = interest * 0.1;
     const n = year * 12;
     const monthlyInterest = (amount * rate) / n;
-    const monthlyPayment = monthlyInterest.toFixed(0);
+    let monthlyPayment = monthlyInterest.toFixed(0);
     setMonthlyInterest(monthlyPayment);
     console.log(n);
   };
+
+  const principal = monthlyPayment - monthlyEmi;
+  console.log("pri", monthlyPayment);
   return (
     <>
       <form onSubmit={submitHandler}>
@@ -77,6 +81,8 @@ const Cal = () => {
           <div style={{ fontSize: "30px" }} className="d-flex">
             {monthlyInterest} Interest <br />
             {result} RS
+            <br />
+            {principal}principal
           </div>
         </div>
       </form>
