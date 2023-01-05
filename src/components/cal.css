@@ -1,0 +1,45 @@
+.main-container {
+  text-align: center;
+}
+/* .rs-slider-handle {
+    top: -16% !important;
+} */
+
+.main-input {
+  width: 50px;
+  position: absolute;
+  top: -15px;
+  left: 350px;
+  border: none;
+}
+.slider-container {
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 100px;
+  position: relative;
+}
+.slider {
+  width: 400px;
+}
+
+.result {
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.button {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+}
