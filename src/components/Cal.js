@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import "./cal.css";
-import "rsuite/dist/rsuite.min.css";
+import React, { useState } from 'react';
+import './cal.css';
+import 'rsuite/dist/rsuite.min.css';
 
 const Cal = () => {
   //   const [value, setValue] = useState(0);
   const [amount, setAmount] = useState(0);
   const [year, setYear] = useState(0);
   const [interest, setInterest] = useState(0);
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState('');
   const [monthlyInterest, setMonthlyInterest] = useState();
-  const [result, setResult] = useState();
-  let monthlyPayment;
-  let monthlyEmi;
+  const [monthlyEmi, setMonthlyEmi] = useState();
+
   const submitHandler = (e) => {
     e.preventDefault();
   };
@@ -21,46 +20,52 @@ const Cal = () => {
     const emi =
       (amount * r * Math.pow(1 + r, month)) / (Math.pow(1 + r, month) - 1);
     let monthlyEmi = emi.toFixed(0);
-    setResult(monthlyEmi);
-    console.log(monthlyEmi);
+    setMonthlyEmi(monthlyEmi);
+    // console.log(monthlyEmi);
   }
 
   const calculateMonthlyInterest = () => {
     const rate = interest * 0.1;
     const n = year * 12;
-    const monthlyInterest = (amount * rate) / n;
-    let monthlyPayment = monthlyInterest.toFixed(0);
-    setMonthlyInterest(monthlyPayment);
-    console.log(n);
+    const monthlyInterestPayment = (amount * rate) / n;
+    let monthlyInterest = monthlyInterestPayment.toFixed(0);
+    setMonthlyInterest(monthlyInterest);
+    // console.log(n);
   };
+  const principal = monthlyEmi - monthlyInterest;
+  const monthlyPrincipal = +principal.toFixed(0);
 
-  const principal = monthlyPayment - monthlyEmi;
-  console.log("pri", monthlyPayment);
+  const outstadingBalance = amount - monthlyPrincipal;
+  const monthlyOutstandingBalance = +outstadingBalance.toFixed(0);
+
   return (
     <>
       <form onSubmit={submitHandler}>
         <div className="slider-container">
-          <div>Loan Amount</div>
+          <div className="input-label">Loan Amount</div>
           <input
-            label="What is the principal?"
+            className="input"
+            placeholder="What is the principal?"
             variant="outlined"
             type="number"
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
         <div className="slider-container">
-          <div>Tenure (Years)</div>
+          <div className="input-label">Tenure (Years)</div>
           <input
-            label="How many years?"
+            className="input"
+            placeholder="How many years?"
             variant="outlined"
             type="number"
             onChange={(e) => setYear(e.target.value)}
           />
         </div>
         <div className="slider-container m-b">
-          <div>Interest Rate (% P.A.)</div>
+          <div className="input-label">Interest Rate (% P.A.)</div>
           <input
-            label="Annual Interest rate?"
+            className="input"
+            placeholder="Annual Interest rate?"
             variant="outlined"
             type="number"
             onChange={(e) => setInterest(e.target.value)}
@@ -77,15 +82,22 @@ const Cal = () => {
           >
             Calculate
           </button>
-          <div>Loan EMI</div>
-          <div style={{ fontSize: "30px" }} className="d-flex">
-            {monthlyInterest} Interest <br />
-            {result} RS
+          <div className="d-flex">
+            <div className="result-box">{monthlyInterest} </div> Monthly
+            Interest <br />
+            <div className="result-box"> {monthlyEmi} </div>
+            Monthly EMI
             <br />
-            {principal}principal
+            <div className="result-box"> {monthlyPrincipal}</div>
+            Monthly Principal Paid
+            <div className="result-box">{monthlyOutstandingBalance} </div>
+            Outstanding Balance
           </div>
         </div>
       </form>
+      <table>
+        <tbody></tbody>
+      </table>
     </>
   );
 };
