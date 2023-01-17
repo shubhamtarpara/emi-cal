@@ -176,10 +176,10 @@ const Cal = () => {
         <Table.Head>
           <Table.TextHeaderCell>Month</Table.TextHeaderCell>
           {/* <Table.TextHeaderCell>Previous</Table.TextHeaderCell> */}
-          <Table.TextHeaderCell>Begining Loan Balance </Table.TextHeaderCell>
-          <Table.TextHeaderCell>EMI</Table.TextHeaderCell>
+          <Table.TextHeaderCell>EMI </Table.TextHeaderCell>
           <Table.TextHeaderCell>Principal</Table.TextHeaderCell>
-          <Table.TextHeaderCell>Monthly Interest </Table.TextHeaderCell>
+          <Table.TextHeaderCell>Monthly Interest</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Outstanding Balance</Table.TextHeaderCell>
         </Table.Head>
         <Table.Body>
           {tableData.map((item, index) => {
