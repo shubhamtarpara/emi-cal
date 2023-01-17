@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './cal.css';
-// import { Table } from 'evergreen-ui';
+import { Table } from 'evergreen-ui';
 // import 'rsuite/dist/rsuite.min.css';
 
 const Cal = () => {
@@ -75,8 +75,8 @@ const Cal = () => {
     const monthlyPrincipalAmount = +principal.toFixed(0); // calculate monthly PRINCIPAL
     // setMonthlyPrincipal(monthlyPrincipalAmount);
     calculatedValue.monthlyPrincipalAmount = monthlyPrincipalAmount;
-    console.log(monthlyInterest, 'monthlyInterest');
-    console.log(monthlyEmi, 'monthlyEmi');
+    // console.log(monthlyInterest, 'monthlyInterest');
+    // console.log(monthlyEmi, 'monthlyEmi');
 
     const outStandingBalanceAmount = amt - monthlyPrincipalAmount;
     const monthlyOutstandingBalance = +outStandingBalanceAmount.toFixed(0); // calculate monthly OUTSTANDING BALANCE
@@ -172,6 +172,32 @@ const Cal = () => {
       >
         Calculate
       </button>
+      <Table className="table-data">
+        <Table.Head>
+          <Table.TextHeaderCell>Month</Table.TextHeaderCell>
+          {/* <Table.TextHeaderCell>Previous</Table.TextHeaderCell> */}
+          <Table.TextHeaderCell>Begining Loan Balance </Table.TextHeaderCell>
+          <Table.TextHeaderCell>EMI</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Principal</Table.TextHeaderCell>
+          <Table.TextHeaderCell>Monthly Interest </Table.TextHeaderCell>
+        </Table.Head>
+        <Table.Body>
+          {tableData.map((item, index) => {
+            return (
+              <Table.Row key={index}>
+                <Table.TextCell>{index + 1}</Table.TextCell>
+                {/* <Table.TextCell>{prev}</Table.TextCell> */}
+                <Table.TextCell>{item.monthlyEmi}</Table.TextCell>
+                <Table.TextCell>{item.monthlyPrincipalAmount}</Table.TextCell>
+                <Table.TextCell>{item.monthlyInterest}</Table.TextCell>
+                <Table.TextCell>
+                  {item.monthlyOutstandingBalance}
+                </Table.TextCell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table>
     </>
   );
 };
