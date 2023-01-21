@@ -52,11 +52,12 @@ const Cal = () => {
       monthlyInterest: 0,
       monthlyPrincipalAmount: 0,
       monthlyOutstandingBalance: 0,
-      // monthlyEmi: 0,
+      monthlyEmi: 0,
     };
 
     const r = interest / (12 * 100);
     const month = year * 12;
+    // console.log(month, 'month');
     const emi =
       (amount * r * Math.pow(1 + r, month)) / (Math.pow(1 + r, month) - 1);
     const monthlyEmi = emi.toFixed(0); // calculate monthly EMI
@@ -64,9 +65,12 @@ const Cal = () => {
     calculatedValue.monthlyEmi = monthlyEmi;
     // console.log(monthlyEmi, 'monthlyEmi1');
 
-    const rate = interest * 0.01;
-    const n = year * 12;
-    const monthlyInterestPayment = (amt * rate) / n;
+    const rate = (interest * 0.01) / 12; // working correctly
+    const n = year * 12; // working correctly
+    console.log(n, 'n-interest');
+    // console.log(amt, '1');
+    const monthlyInterestPayment = amt * rate;
+    // console.log(amt, '2');
     const monthlyInterest = monthlyInterestPayment.toFixed(0); // calculate monthly INTEREST
     // setMonthlyInterest(monthlyInterest);
     calculatedValue.monthlyInterest = monthlyInterest;
